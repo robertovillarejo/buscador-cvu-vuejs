@@ -1,11 +1,12 @@
 <template>
   <div id="app">
     <div class="row">
-      <div class="col-4"/>
+      <div class="col-4" />
       <div class="col-4">
-        <buscador-cvu></buscador-cvu>
+        <buscador-cvu v-model="personaFisica"></buscador-cvu>
+        <code>{{ personaFisica }}</code>
       </div>
-      <div class="col-4"/>
+      <div class="col-4" />
     </div>
   </div>
 </template>
@@ -14,9 +15,15 @@
 import Vue, { VueConstructor } from "vue";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import BuscadorCvuComponent from "../src/buscador-cvu.vue";
+import BuscadorCvuComponent from "../src/index";
+
+Vue.use(BuscadorCvuComponent, { host: "http://localhost:3000" });
 
 export default Vue.extend({
-  components: { "buscador-cvu": BuscadorCvuComponent }
+  data: function() {
+    return {
+      personaFisica: null
+    };
+  }
 });
 </script>

@@ -5,7 +5,7 @@
       dismissible
       :variant="alertType"
       @dismissed="dismissCountDown=0"
-      @dismiss-count-down="countDownChanged"
+      @dismiss-count-down="dismissCountDown = $event"
     >{{alertMessage}}</b-alert>
     <form v-on:submit.prevent="buscar()">
       <input id="cvu-search" name="cvu-search" v-model.trim="searchKey" />

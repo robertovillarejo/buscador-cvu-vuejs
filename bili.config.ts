@@ -24,7 +24,7 @@ const config: Config = {
     }
     return config;
   },
-  externals: ["vue-class-component", "vue-property-decorator"]
+  externals: ["vue-class-component", "vue-property-decorator", "axios", "bootstrap", "bootstrap-vue", "jquery", "popper.js", "@fortawesome/fontawesome-svg-core", "@fortawesome/free-solid-svg-icons", "@fortawesome/vue-fontawesome"]
 }
 
 export default config;

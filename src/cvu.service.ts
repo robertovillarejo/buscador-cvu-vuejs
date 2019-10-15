@@ -1,19 +1,20 @@
 import axios from 'axios';
+import { IPersonaFisica } from './model/persona-fisica.model';
 
 export default class CvuService {
 
     private baseApiUrl: string;
 
     constructor(baseApiUrl?: string) {
-        this.baseApiUrl = baseApiUrl || 'services/cvu/api/';
+        this.baseApiUrl = baseApiUrl || 'services/cvu/api';
     }
 
-    public retrieveByCvu(cvu: string): Promise<any> {
-        return new Promise<any>((resolve, reject) => {
+    public retrieveByCvu(cvu: string): Promise<IPersonaFisica> {
+        return new Promise<IPersonaFisica>((resolve, reject) => {
             axios
-                .get(this.baseApiUrl + 'cvu/' + cvu)
-                .then(function (res: any) {
-                    resolve(res);
+                .get(this.baseApiUrl + '/cvu/' + cvu)
+                .then(function (res) {
+                    resolve((<IPersonaFisica>res.data));
                 })
                 .catch((err: any) => {
                     reject(err);
@@ -21,22 +22,22 @@ export default class CvuService {
         });
     }
 
-    public retrieveByRcea(rcea: string): Promise<any> {
-        return new Promise<any>((resolve, reject) => {
+    public retrieveByRcea(rcea: string): Promise<IPersonaFisica> {
+        return new Promise<IPersonaFisica>((resolve, reject) => {
             axios
-                .get(this.baseApiUrl + 'rcea/' + rcea)
+                .get(this.baseApiUrl + '/rcea/' + rcea)
                 .then(function (res) {
-                    resolve(res);
+                    resolve((<IPersonaFisica>res.data));
                 }).catch(err => reject(err));
         });
     }
 
-    public retrieveByReniecyt(numeroReniecyt: string): Promise<any> {
-        return new Promise<any>((resolve, reject) => {
+    public retrieveByReniecyt(numeroReniecyt: string): Promise<IPersonaFisica> {
+        return new Promise<IPersonaFisica>((resolve, reject) => {
             axios
-                .get(this.baseApiUrl + 'reniecyt/' + numeroReniecyt)
+                .get(this.baseApiUrl + '/reniecyt/' + numeroReniecyt)
                 .then(function (res) {
-                    resolve(res);
+                    resolve((<IPersonaFisica>res.data));
                 })
                 .catch(err => {
                     reject(err);
@@ -44,12 +45,12 @@ export default class CvuService {
         });
     }
 
-    public retrieveByLogin(correoUsuario: string): Promise<any> {
-        return new Promise<any>((resolve, reject) => {
+    public retrieveByLogin(correoUsuario: string): Promise<IPersonaFisica> {
+        return new Promise<IPersonaFisica>((resolve, reject) => {
             axios
-                .get(this.baseApiUrl + 'personas/' + correoUsuario)
+                .get(this.baseApiUrl + '/personas/' + correoUsuario)
                 .then(function (res) {
-                    resolve(res);
+                    resolve((<IPersonaFisica>res.data));
                 }).catch(err => reject(err))
         });
     }

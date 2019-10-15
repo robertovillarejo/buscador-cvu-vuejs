@@ -2,10 +2,22 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faSearch } from '@fortawesome/free-solid-svg-icons/faSearch';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import bAlert from 'bootstrap-vue/es/components/alert/alert';
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from 'vue-property-decorator';
 import CvuService from './cvu.service';
+import { IPersonaFisica } from './model/persona-fisica.model';
 
 library.add(faSearch); // agrega el icono de lupa
+
+export class Options {
+
+    constructor(
+        public host?: string
+    ) { }
+
+}
+
+let defaultConfig = new Options();
+export { defaultConfig };
 
 @Component({
     components: {
@@ -15,7 +27,8 @@ library.add(faSearch); // agrega el icono de lupa
 })
 export default class BuscadorCvu extends Vue {
 
-    private cvuService = new CvuService();
+    @Prop()
+    readonly value!: IPersonaFisica;
 
     public dismissCountDown = 0;
     public alertType = '';
@@ -24,15 +37,17 @@ export default class BuscadorCvu extends Vue {
     public searchKey: string = '';
     public isSearching: boolean = false;
 
+    public get options(): Options {
+        return (<any>this).$CVU_SEARCHER_DEFAULT_OPTIONS || defaultConfig;
+    }
+
     public buscar() {
         if (this.searchKey) {
             this.isSearching = true;
-            this.cvuService
+            new CvuService(this.options.host)
                 .retrieveByCvu(this.searchKey)
-                .then(res => {
-                    res.data.correoLogin = res.data.login;
-                    res.data.login = null;
-                    this.$emit('found', res.data);
+                .then(pf => {
+                    this.$emit('input', pf);
                     this.searchKey = '';
                     this.isSearching = false;
                 })
@@ -43,9 +58,5 @@ export default class BuscadorCvu extends Vue {
                     this.isSearching = false;
                 });
         }
-    }
-
-    public countDownChanged(dismissCountDown: number) {
-        this.dismissCountDown = dismissCountDown;
     }
 }
