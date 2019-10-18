@@ -252,6 +252,36 @@ var BuscadorCvuComponent = __vue_normalize__({
   staticRenderFns: __vue_staticRenderFns__
 }, __vue_inject_styles__, __vue_script__, __vue_scope_id__, __vue_is_functional_template__);
 
+var PersonaFisica =
+/** @class */
+function () {
+  function PersonaFisica(cvu, curp, titulo, nombre, apellidoPaterno, apellidoMaterno, rfc, genero, correo, login, gradoAcademico, nivelsni, instituciones, domicilios, paisResidencia, rcea) {
+    this.cvu = cvu;
+    this.curp = curp;
+    this.titulo = titulo;
+    this.nombre = nombre;
+    this.apellidoPaterno = apellidoPaterno;
+    this.apellidoMaterno = apellidoMaterno;
+    this.rfc = rfc;
+    this.genero = genero;
+    this.correo = correo;
+    this.login = login;
+    this.gradoAcademico = gradoAcademico;
+    this.nivelsni = nivelsni;
+    this.instituciones = instituciones;
+    this.domicilios = domicilios;
+    this.paisResidencia = paisResidencia;
+    this.rcea = rcea;
+  }
+
+  return PersonaFisica;
+}();
+
+var personaFisica_model = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    PersonaFisica: PersonaFisica
+});
+
 var index = {
   install: function install(Vue, globalOptions) {
     var options = tslib.__assign(tslib.__assign({}, defaultConfig), globalOptions);
@@ -263,4 +293,5 @@ var index = {
 
 exports.BuscadorCvuComponent = BuscadorCvuComponent;
 exports.default = index;
+exports.model = personaFisica_model;
 //# sourceMappingURL=index.js.map

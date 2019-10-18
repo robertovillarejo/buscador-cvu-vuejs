@@ -1,5 +1,6 @@
 import BuscadorCvuComponent from "./buscador-cvu.vue";
 import { defaultConfig } from './buscador-cvu.component';
+import * as model from "./model/persona-fisica.model";
 
 export default {
   install(Vue: any, globalOptions: any) {
@@ -9,4 +10,4 @@ export default {
   }
 }
 
-export { BuscadorCvuComponent };
+export { BuscadorCvuComponent, model };
