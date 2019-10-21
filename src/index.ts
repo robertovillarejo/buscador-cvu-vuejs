@@ -1,6 +1,6 @@
-import BuscadorCvuComponent from "./buscador-cvu.vue";
 import { defaultConfig } from './buscador-cvu.component';
-import * as model from "./model/persona-fisica.model";
+import BuscadorCvuComponent from "./buscador-cvu.vue";
+import { Domicilio, EntidadFederativa, IDomicilio, IEntidadFederativa, IInstitucion, Institucion, IPersonaFisica, PersonaFisica } from "./model";
 
 export default {
   install(Vue: any, globalOptions: any) {
@@ -10,4 +10,4 @@ export default {
   }
 }
 
-export { BuscadorCvuComponent, model };
+export { BuscadorCvuComponent, IDomicilio, IEntidadFederativa, IInstitucion, IPersonaFisica, Domicilio, EntidadFederativa, Institucion, PersonaFisica };

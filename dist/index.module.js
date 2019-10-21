@@ -246,6 +246,42 @@ var BuscadorCvuComponent = __vue_normalize__({
   staticRenderFns: __vue_staticRenderFns__
 }, __vue_inject_styles__, __vue_script__, __vue_scope_id__, __vue_is_functional_template__);
 
+var Domicilio =
+/** @class */
+function () {
+  function Domicilio(direccion, tipo) {
+    this.direccion = direccion;
+    this.tipo = tipo;
+  }
+
+  return Domicilio;
+}();
+
+var EntidadFederativa =
+/** @class */
+function () {
+  function EntidadFederativa(id, nombre) {
+    this.id = id;
+    this.nombre = nombre;
+  }
+
+  return EntidadFederativa;
+}();
+
+var Institucion =
+/** @class */
+function () {
+  function Institucion(nombre, localidad, municipio, clave, entidadFederativa) {
+    this.nombre = nombre;
+    this.localidad = localidad;
+    this.municipio = municipio;
+    this.clave = clave;
+    this.entidadFederativa = entidadFederativa;
+  }
+
+  return Institucion;
+}();
+
 var PersonaFisica =
 /** @class */
 function () {
@@ -271,11 +307,6 @@ function () {
   return PersonaFisica;
 }();
 
-var personaFisica_model = /*#__PURE__*/Object.freeze({
-    __proto__: null,
-    PersonaFisica: PersonaFisica
-});
-
 var index = {
   install: function install(Vue, globalOptions) {
     var options = __assign(__assign({}, defaultConfig), globalOptions);
@@ -286,5 +317,5 @@ var index = {
 };
 
 export default index;
-export { BuscadorCvuComponent, personaFisica_model as model };
+export { BuscadorCvuComponent, Domicilio, EntidadFederativa, Institucion, PersonaFisica };
 //# sourceMappingURL=index.module.js.map
