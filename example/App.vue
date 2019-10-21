@@ -1,12 +1,25 @@
 <template>
   <div id="app">
+    <div class="row justify-content-center">
+      <h1>Ejemplos de buscador CVU</h1>
+    </div>
     <div class="row">
-      <div class="col-4" />
-      <div class="col-4">
-        <buscador-cvu v-model="personaFisica"></buscador-cvu>
+      <div class="col-3" />
+      <div class="col-3">
+        <buscador-cvu v-model="personaFisica">
+          <template v-slot:message="slotProps">
+            <h5>Mostrando mensaje usando slot</h5>
+            {{ slotProps.message }}
+          </template>
+        </buscador-cvu>
         <code>{{ personaFisica }}</code>
       </div>
-      <div class="col-4" />
+      <div class="col-3">
+        <h5>Mostrando mensaje sin usar slot</h5>
+        <buscador-cvu v-model="personaFisica" />
+        <code>{{ personaFisica }}</code>
+      </div>
+      <div class="col-3" />
     </div>
   </div>
 </template>

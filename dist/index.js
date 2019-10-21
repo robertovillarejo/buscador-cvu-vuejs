@@ -150,7 +150,7 @@ var __vue_render__ = function __vue_render__() {
 
   return _c('div', {
     staticClass: "form-group mb-5"
-  }, [_c('b-alert', {
+  }, [_vm._t("message", [_c('b-alert', {
     attrs: {
       "show": _vm.dismissCountDown,
       "dismissible": "",
@@ -164,7 +164,9 @@ var __vue_render__ = function __vue_render__() {
         _vm.dismissCountDown = $event;
       }
     }
-  }, [_vm._v(_vm._s(_vm.alertMessage))]), _vm._v(" "), _c('form', {
+  }, [_vm._v(_vm._s(_vm.alertMessage))])], {
+    "message": _vm.alertMessage
+  }), _vm._v(" "), _c('form', {
     on: {
       "submit": function submit($event) {
         $event.preventDefault();
@@ -211,7 +213,7 @@ var __vue_render__ = function __vue_render__() {
     attrs: {
       "icon": "search"
     }
-  }), _vm._v(" \n      "), !_vm.isSearching ? _c('span', [_vm._v("Buscar")]) : _c('span', [_vm._v("Buscando...")])], 1)])], 1);
+  }), _vm._v(" \n      "), !_vm.isSearching ? _c('span', [_vm._v("Buscar")]) : _c('span', [_vm._v("Buscando...")])], 1)])], 2);
 };
 
 var __vue_staticRenderFns__ = [];
