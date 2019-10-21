@@ -1,6 +1,6 @@
 {
   "name": "@conacyt/buscador-cvu",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "El componente de VueJS buscador de Personas Físicas por CVU",
   "keywords": [
     "vue",
