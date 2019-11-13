@@ -10,14 +10,19 @@
         >{{ alertMessage }}</b-alert
       >
     </slot>
-    <form v-on:submit.prevent="buscar()">
-      <input id="cvu-search" name="cvu-search" v-model.trim="searchKey" />
+    <form v-on:submit.prevent="search()">
+      <input
+        type="search"
+        id="cvu-search"
+        name="cvu-search"
+        v-model.trim="searchKey"
+      />
       <span>&nbsp;</span>
       <button
         type="submit"
         id="cvu-search-button"
         class="btn btn-primary"
-        :disabled="isSearching"
+        :disabled="searchButtonDisabled()"
       >
         <font-awesome-icon icon="search"></font-awesome-icon>&nbsp;
         <span v-if="!isSearching">Buscar</span>

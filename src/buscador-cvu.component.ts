@@ -41,7 +41,7 @@ export default class BuscadorCvu extends Vue {
         return (<any>this).$CVU_SEARCHER_DEFAULT_OPTIONS || defaultConfig;
     }
 
-    public buscar() {
+    public search() {
         if (this.searchKey) {
             this.isSearching = true;
             new CvuService(this.options.host)
@@ -58,5 +58,9 @@ export default class BuscadorCvu extends Vue {
                     this.isSearching = false;
                 });
         }
+    }
+
+    public searchButtonDisabled() {
+        return this.searchKey && this.isSearching;
     }
 }

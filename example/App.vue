@@ -6,18 +6,18 @@
     <div class="row">
       <div class="col-3" />
       <div class="col-3">
-        <buscador-cvu v-model="personaFisica">
+        <buscador-cvu v-model="personaFisicaLeft">
           <template v-slot:message="slotProps">
             <h5>Mostrando mensaje usando slot</h5>
             {{ slotProps.message }}
           </template>
         </buscador-cvu>
-        <code>{{ personaFisica }}</code>
+        <code>{{ personaFisicaLeft }}</code>
       </div>
       <div class="col-3">
         <h5>Mostrando mensaje sin usar slot</h5>
-        <buscador-cvu v-model="personaFisica" />
-        <code>{{ personaFisica }}</code>
+        <buscador-cvu v-model="personaFisicaRight" />
+        <code>{{ personaFisicaRight }}</code>
       </div>
       <div class="col-3" />
     </div>
@@ -35,7 +35,8 @@ Vue.use(BuscadorCvuComponent, { host: "http://localhost:3000" });
 export default Vue.extend({
   data: function() {
     return {
-      personaFisica: null
+      personaFisicaLeft: null,
+      personaFisicaRight: null
     };
   }
 });
