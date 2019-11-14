@@ -107,7 +107,7 @@ function (_super) {
     configurable: true
   });
 
-  BuscadorCvu.prototype.buscar = function () {
+  BuscadorCvu.prototype.search = function () {
     var _this = this;
 
     if (this.searchKey) {
@@ -124,6 +124,10 @@ function (_super) {
         _this.isSearching = false;
       });
     }
+  };
+
+  BuscadorCvu.prototype.searchButtonDisabled = function () {
+    return this.searchKey && this.isSearching;
   };
 
   tslib.__decorate([vuePropertyDecorator.Prop()], BuscadorCvu.prototype, "value", void 0);
@@ -170,7 +174,7 @@ var __vue_render__ = function __vue_render__() {
     on: {
       "submit": function submit($event) {
         $event.preventDefault();
-        return _vm.buscar();
+        return _vm.search();
       }
     }
   }, [_c('input', {
@@ -184,6 +188,7 @@ var __vue_render__ = function __vue_render__() {
       }
     }],
     attrs: {
+      "type": "search",
       "id": "cvu-search",
       "name": "cvu-search"
     },
@@ -207,7 +212,7 @@ var __vue_render__ = function __vue_render__() {
     attrs: {
       "type": "submit",
       "id": "cvu-search-button",
-      "disabled": _vm.isSearching
+      "disabled": _vm.searchButtonDisabled()
     }
   }, [_c('font-awesome-icon', {
     attrs: {
