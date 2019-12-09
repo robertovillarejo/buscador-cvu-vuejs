@@ -13,11 +13,17 @@
     <form v-on:submit.prevent="search()">
       <input
         type="search"
+        class="input"
         id="cvu-search"
         name="cvu-search"
         v-model.trim="searchKey"
       />
-      <span>&nbsp;</span>
+      <font-awesome-icon
+        icon="times-circle"
+        v-if="this.searchKey.length > 0"
+        @click="clear"
+      ></font-awesome-icon
+      >&nbsp;
       <button
         type="submit"
         id="cvu-search-button"
@@ -31,5 +37,4 @@
     </form>
   </div>
 </template>
-
 <script lang="ts" src="./buscador-cvu.component.ts"></script>

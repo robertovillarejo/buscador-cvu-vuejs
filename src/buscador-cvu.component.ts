@@ -1,12 +1,14 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faSearch } from '@fortawesome/free-solid-svg-icons/faSearch';
+import { faSearch} from '@fortawesome/free-solid-svg-icons/faSearch';
+import { faTimesCircle} from '@fortawesome/free-solid-svg-icons/faTimesCircle';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import bAlert from 'bootstrap-vue/es/components/alert/alert';
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import CvuService from './cvu.service';
 import { IPersonaFisica } from './model/persona-fisica.model';
 
-library.add(faSearch); // agrega el icono de lupa
+
+library.add(faSearch, faTimesCircle); // agrega el icono de lupa && el icono de exit
 
 export class Options {
 
@@ -63,4 +65,8 @@ export default class BuscadorCvu extends Vue {
     public searchButtonDisabled() {
         return this.searchKey && this.isSearching;
     }
+
+    public clear() {
+        return this.searchKey = '';
+   }
 }

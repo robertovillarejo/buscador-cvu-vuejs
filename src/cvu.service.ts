@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import { IPersonaFisica } from './model/persona-fisica.model';
 
 export default class CvuService {
@@ -48,10 +49,11 @@ export default class CvuService {
     public retrieveByLogin(correoUsuario: string): Promise<IPersonaFisica> {
         return new Promise<IPersonaFisica>((resolve, reject) => {
             axios
-                .get(this.baseApiUrl + '/personas/' + correoUsuario)
-                .then(function (res) {
-                    resolve((<IPersonaFisica>res.data));
-                }).catch(err => reject(err))
-        });
-    }
+            .get(this.baseApiUrl + '/personas/' + correoUsuario)
+            .then(function (res) {
+        resolve((<IPersonaFisica>res.data));
+        })
+        .catch(err => reject(err));
+    });
+  }
 }
