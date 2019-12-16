@@ -7,7 +7,7 @@
       @dismissed="dismissCountDown = 0"
       @dismiss-count-down="dismissCountDown = $event"
     >
-      <slot name="message" v-bind:cvu="searchKey">{{ alertMessage }}</slot>
+      <slot name="message" v-bind:cvu="searchedKey">{{ alertMessage }}</slot>
     </b-alert>
     <form v-on:submit.prevent="search()">
       <input

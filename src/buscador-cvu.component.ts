@@ -35,6 +35,7 @@ export default class BuscadorCvu extends Vue {
     public alertMessage = '';
 
     public searchKey: string = '';
+    public searchedKey: string = ''; // Used to show alert message
     public isSearching: boolean = false;
 
     public get options(): Options {
@@ -44,17 +45,20 @@ export default class BuscadorCvu extends Vue {
     public search() {
         if (this.searchKey) {
             this.isSearching = true;
+            this.dismissCountDown = 0;
             new CvuService(this.options.host)
                 .retrieveByCvu(this.searchKey)
                 .then(pf => {
+                    this.searchedKey = this.searchKey + '';
                     this.$emit('input', pf);
                     this.searchKey = '';
                     this.isSearching = false;
                 })
                 .catch(() => {
                     this.$emit('input', null);
+                    this.searchedKey = this.searchKey + '';
                     this.alertType = 'warning';
-                    this.alertMessage = `No se encontró a la persona con cvu ${this.searchKey}`;
+                    this.alertMessage = `No se encontró a la persona con cvu "${this.searchKey}"`;
                     this.dismissCountDown = 5;
                     this.isSearching = false;
                 });
@@ -62,6 +66,6 @@ export default class BuscadorCvu extends Vue {
     }
 
     public searchButtonDisabled() {
-        return this.searchKey && this.isSearching;
+        return !this.searchKey || this.isSearching;
     }
 }

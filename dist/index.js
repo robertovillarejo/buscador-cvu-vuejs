@@ -95,6 +95,8 @@ function (_super) {
     _this.alertType = '';
     _this.alertMessage = '';
     _this.searchKey = '';
+    _this.searchedKey = ''; // Used to show alert message
+
     _this.isSearching = false;
     return _this;
   }
@@ -112,7 +114,10 @@ function (_super) {
 
     if (this.searchKey) {
       this.isSearching = true;
+      this.dismissCountDown = 0;
       new CvuService(this.options.host).retrieveByCvu(this.searchKey).then(function (pf) {
+        _this.searchedKey = _this.searchKey + '';
+
         _this.$emit('input', pf);
 
         _this.searchKey = '';
@@ -120,8 +125,9 @@ function (_super) {
       }).catch(function () {
         _this.$emit('input', null);
 
+        _this.searchedKey = _this.searchKey + '';
         _this.alertType = 'warning';
-        _this.alertMessage = "No se encontr\xF3 a la persona con cvu " + _this.searchKey;
+        _this.alertMessage = "No se encontr\xF3 a la persona con cvu \"" + _this.searchKey + "\"";
         _this.dismissCountDown = 5;
         _this.isSearching = false;
       });
@@ -129,7 +135,7 @@ function (_super) {
   };
 
   BuscadorCvu.prototype.searchButtonDisabled = function () {
-    return this.searchKey && this.isSearching;
+    return !this.searchKey || this.isSearching;
   };
 
   tslib.__decorate([vuePropertyDecorator.Prop()], BuscadorCvu.prototype, "value", void 0);
@@ -171,7 +177,7 @@ var __vue_render__ = function __vue_render__() {
       }
     }
   }, [_vm._t("message", [_vm._v(_vm._s(_vm.alertMessage))], {
-    "cvu": _vm.searchKey
+    "cvu": _vm.searchedKey
   })], 2), _vm._v(" "), _c('form', {
     on: {
       "submit": function submit($event) {
