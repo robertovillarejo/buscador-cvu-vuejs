@@ -52,6 +52,7 @@ export default class BuscadorCvu extends Vue {
                     this.isSearching = false;
                 })
                 .catch(() => {
+                    this.$emit('input', null);
                     this.alertType = 'warning';
                     this.alertMessage = `No se encontró a la persona con cvu ${this.searchKey}`;
                     this.dismissCountDown = 5;

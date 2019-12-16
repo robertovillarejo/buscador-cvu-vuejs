@@ -112,6 +112,8 @@ function (_super) {
         _this.searchKey = '';
         _this.isSearching = false;
       }).catch(function () {
+        _this.$emit('input', null);
+
         _this.alertType = 'warning';
         _this.alertMessage = "No se encontr\xF3 a la persona con cvu " + _this.searchKey;
         _this.dismissCountDown = 5;
