@@ -1,15 +1,14 @@
 <template>
   <div class="form-group mb-5">
-    <slot name="message" v-bind:message="alertMessage">
-      <b-alert
-        :show="dismissCountDown"
-        dismissible
-        :variant="alertType"
-        @dismissed="dismissCountDown = 0"
-        @dismiss-count-down="dismissCountDown = $event"
-        >{{ alertMessage }}</b-alert
-      >
-    </slot>
+    <b-alert
+      :show="dismissCountDown"
+      dismissible
+      :variant="alertType"
+      @dismissed="dismissCountDown = 0"
+      @dismiss-count-down="dismissCountDown = $event"
+    >
+      <slot name="message" v-bind:cvu="searchKey">{{ alertMessage }}</slot>
+    </b-alert>
     <form v-on:submit.prevent="search()">
       <input
         type="search"
