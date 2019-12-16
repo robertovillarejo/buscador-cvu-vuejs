@@ -216,11 +216,17 @@ var __vue_render__ = function __vue_render__() {
       "id": "cvu-search-button",
       "disabled": _vm.searchButtonDisabled()
     }
-  }, [_c('font-awesome-icon', {
+  }, [!_vm.isSearching ? _c('font-awesome-icon', {
     attrs: {
       "icon": "search"
     }
-  }), _vm._v(" \n      "), !_vm.isSearching ? _c('span', [_vm._v("Buscar")]) : _c('span', [_vm._v("Buscando...")])], 1)])], 1);
+  }) : _c('span', {
+    staticClass: "spinner-border spinner-border-sm",
+    attrs: {
+      "role": "status",
+      "aria-hidden": "true"
+    }
+  })], 1)])], 1);
 };
 
 var __vue_staticRenderFns__ = [];

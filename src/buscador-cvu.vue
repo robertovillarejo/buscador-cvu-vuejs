@@ -23,9 +23,16 @@
         class="btn btn-primary"
         :disabled="searchButtonDisabled()"
       >
-        <font-awesome-icon icon="search"></font-awesome-icon>&nbsp;
-        <span v-if="!isSearching">Buscar</span>
-        <span v-else>Buscando...</span>
+        <font-awesome-icon
+          icon="search"
+          v-if="!isSearching"
+        ></font-awesome-icon>
+        <span
+          class="spinner-border spinner-border-sm"
+          role="status"
+          aria-hidden="true"
+          v-else
+        ></span>
       </button>
     </form>
   </div>
