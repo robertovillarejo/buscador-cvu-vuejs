@@ -7,6 +7,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 var tslib = require('tslib');
 var fontawesomeSvgCore = require('@fortawesome/fontawesome-svg-core');
 var faSearch = require('@fortawesome/free-solid-svg-icons/faSearch');
+var faTimesCircle = require('@fortawesome/free-solid-svg-icons/faTimesCircle');
 var vueFontawesome = require('@fortawesome/vue-fontawesome');
 var bAlert = _interopDefault(require('bootstrap-vue/es/components/alert/alert'));
 var vuePropertyDecorator = require('vue-property-decorator');
@@ -70,7 +71,7 @@ function () {
   return CvuService;
 }();
 
-fontawesomeSvgCore.library.add(faSearch.faSearch); // agrega el icono de lupa
+fontawesomeSvgCore.library.add(faSearch.faSearch, faTimesCircle.faTimesCircle); // agrega el icono de lupa && el icono de exit
 
 var Options =
 /** @class */
@@ -138,6 +139,10 @@ function (_super) {
     return !this.searchKey || this.isSearching;
   };
 
+  BuscadorCvu.prototype.clear = function () {
+    return this.searchKey = '';
+  };
+
   tslib.__decorate([vuePropertyDecorator.Prop()], BuscadorCvu.prototype, "value", void 0);
 
   BuscadorCvu = tslib.__decorate([vuePropertyDecorator.Component({
@@ -185,6 +190,8 @@ var __vue_render__ = function __vue_render__() {
         return _vm.search();
       }
     }
+  }, [_c('div', {
+    staticClass: "search-wrapper"
   }, [_c('input', {
     directives: [{
       name: "model",
@@ -195,15 +202,24 @@ var __vue_render__ = function __vue_render__() {
         "trim": true
       }
     }],
+    staticClass: "search-box",
     attrs: {
-      "type": "search",
-      "id": "cvu-search",
-      "name": "cvu-search"
+      "type": "text",
+      "name": "focus",
+      "required": "",
+      "placeholder": "Enter search term"
     },
     domProps: {
       "value": _vm.searchKey
     },
     on: {
+      "keyup": function keyup($event) {
+        if (!$event.type.indexOf('key') && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) {
+          return null;
+        }
+
+        return _vm.search();
+      },
       "input": function input($event) {
         if ($event.target.composing) {
           return;
@@ -215,7 +231,12 @@ var __vue_render__ = function __vue_render__() {
         return _vm.$forceUpdate();
       }
     }
-  }), _vm._v(" "), _c('span', [_vm._v(" ")]), _vm._v(" "), _c('button', {
+  }), _vm._v(" "), _c('button', {
+    staticClass: "close-icon",
+    on: {
+      "click": _vm.clear
+    }
+  })]), _vm._v(" "), _c('button', {
     staticClass: "btn btn-primary",
     attrs: {
       "type": "submit",
@@ -238,10 +259,21 @@ var __vue_render__ = function __vue_render__() {
 var __vue_staticRenderFns__ = [];
 /* style */
 
-var __vue_inject_styles__ = undefined;
+var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
+  if (!inject) return;
+  inject("data-v-3d42d87e_0", {
+    source: "body{background-color:#f1f1f1;font-family:Helvetica,Arial,Verdana}.redfamily{color:red}.close-icon,.search-box,.search-wrapper{position:relative;padding:10px}.search-wrapper{width:500px;margin:auto;margin-top:50px}.search-box{width:80%;border:1px solid #ccc;outline:0;border-radius:15px}.search-box:focus{box-shadow:0 0 15px 5px #b0e0ee;border:2px solid #bebede}.close-icon{border:1px solid transparent;background-color:transparent;display:inline-block;vertical-align:middle;outline:0;cursor:pointer}.close-icon:after{content:\"X\";display:block;width:15px;height:15px;position:absolute;background-color:#fa9595;z-index:1;right:35px;top:0;bottom:0;margin:auto;padding:2px;border-radius:50%;text-align:center;color:#fff;font-weight:400;font-size:12px;box-shadow:0 0 2px #e50f0f;cursor:pointer}.search-box:not(:valid)~.close-icon{display:none}",
+    map: undefined,
+    media: undefined
+  });
+};
 /* scoped */
 
+
 var __vue_scope_id__ = undefined;
+/* module identifier */
+
+var __vue_module_identifier__ = undefined;
 /* functional template */
 
 var __vue_is_functional_template__ = false;
@@ -261,17 +293,105 @@ function __vue_normalize__(template, style, script, scope, functional, moduleIde
 
   component._scopeId = scope;
 
+  {
+    var hook;
+
+    if (style) {
+      hook = function hook(context) {
+        style.call(this, createInjector(context));
+      };
+    }
+
+    if (hook !== undefined) {
+      if (component.functional) {
+        // register for functional component in vue file
+        var originalRender = component.render;
+
+        component.render = function renderWithStyleInjection(h, context) {
+          hook.call(context);
+          return originalRender(h, context);
+        };
+      } else {
+        // inject component registration as beforeCreate hook
+        var existing = component.beforeCreate;
+        component.beforeCreate = existing ? [].concat(existing, hook) : [hook];
+      }
+    }
+  }
+
   return component;
 }
 /* style inject */
 
+
+function __vue_create_injector__() {
+  var head = document.head || document.getElementsByTagName('head')[0];
+  var styles = __vue_create_injector__.styles || (__vue_create_injector__.styles = {});
+  var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
+  return function addStyle(id, css) {
+    if (document.querySelector('style[data-vue-ssr-id~="' + id + '"]')) return; // SSR styles are present.
+
+    var group = isOldIE ? css.media || 'default' : id;
+    var style = styles[group] || (styles[group] = {
+      ids: [],
+      parts: [],
+      element: undefined
+    });
+
+    if (!style.ids.includes(id)) {
+      var code = css.source;
+      var index = style.ids.length;
+      style.ids.push(id);
+
+      if ( css.map) {
+        // https://developer.chrome.com/devtools/docs/javascript-debugging
+        // this makes source maps inside style tags work properly in Chrome
+        code += '\n/*# sourceURL=' + css.map.sources[0] + ' */'; // http://stackoverflow.com/a/26603875
+
+        code += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(css.map)))) + ' */';
+      }
+
+      if (isOldIE) {
+        style.element = style.element || document.querySelector('style[data-group=' + group + ']');
+      }
+
+      if (!style.element) {
+        var el = style.element = document.createElement('style');
+        el.type = 'text/css';
+        if (css.media) el.setAttribute('media', css.media);
+
+        if (isOldIE) {
+          el.setAttribute('data-group', group);
+          el.setAttribute('data-next-index', '0');
+        }
+
+        head.appendChild(el);
+      }
+
+      if (isOldIE) {
+        index = parseInt(style.element.getAttribute('data-next-index'));
+        style.element.setAttribute('data-next-index', index + 1);
+      }
+
+      if (style.element.styleSheet) {
+        style.parts.push(code);
+        style.element.styleSheet.cssText = style.parts.filter(Boolean).join('\n');
+      } else {
+        var textNode = document.createTextNode(code);
+        var nodes = style.element.childNodes;
+        if (nodes[index]) style.element.removeChild(nodes[index]);
+        if (nodes.length) style.element.insertBefore(textNode, nodes[index]);else style.element.appendChild(textNode);
+      }
+    }
+  };
+}
 /* style inject SSR */
 
 
 var BuscadorCvuComponent = __vue_normalize__({
   render: __vue_render__,
   staticRenderFns: __vue_staticRenderFns__
-}, __vue_inject_styles__, __vue_script__, __vue_scope_id__, __vue_is_functional_template__);
+}, __vue_inject_styles__, __vue_script__, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, __vue_create_injector__);
 
 var Domicilio =
 /** @class */

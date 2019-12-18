@@ -7,7 +7,7 @@
       <div class="col-3" />
       <div class="col-3">
         <h5>Mostrando mensaje usando slot</h5>
-        <buscador-cvu v-model="personaFisicaLeft" class="cvu-1">
+        <buscador-cvu v-model="personaFisicaLeft">
           <template v-slot:message="slotProps">
             <span>NO SE ENCONTRÓ PERSONA CON CVU</span>
             {{ slotProps.cvu }}
@@ -43,7 +43,3 @@ export default Vue.extend({
 });
 </script>
 <style>
-.cvu-1 {
-  margin-left: -30%;
-}
-</style>

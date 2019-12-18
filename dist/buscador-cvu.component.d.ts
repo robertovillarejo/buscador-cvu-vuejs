@@ -17,4 +17,5 @@ export default class BuscadorCvu extends Vue {
     readonly options: Options;
     search(): void;
     searchButtonDisabled(): boolean;
+    clear(): string;
 }
