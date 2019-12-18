@@ -95,6 +95,8 @@ function (_super) {
     _this.alertType = '';
     _this.alertMessage = '';
     _this.searchKey = '';
+    _this.searchedKey = ''; // Used to show alert message
+
     _this.isSearching = false;
     return _this;
   }
@@ -112,14 +114,20 @@ function (_super) {
 
     if (this.searchKey) {
       this.isSearching = true;
+      this.dismissCountDown = 0;
       new CvuService(this.options.host).retrieveByCvu(this.searchKey).then(function (pf) {
+        _this.searchedKey = _this.searchKey + '';
+
         _this.$emit('input', pf);
 
         _this.searchKey = '';
         _this.isSearching = false;
       }).catch(function () {
+        _this.$emit('input', null);
+
+        _this.searchedKey = _this.searchKey + '';
         _this.alertType = 'warning';
-        _this.alertMessage = "No se encontr\xF3 a la persona con cvu " + _this.searchKey;
+        _this.alertMessage = "No se encontr\xF3 a la persona con cvu \"" + _this.searchKey + "\"";
         _this.dismissCountDown = 5;
         _this.isSearching = false;
       });
@@ -127,7 +135,7 @@ function (_super) {
   };
 
   BuscadorCvu.prototype.searchButtonDisabled = function () {
-    return this.searchKey && this.isSearching;
+    return !this.searchKey || this.isSearching;
   };
 
   tslib.__decorate([vuePropertyDecorator.Prop()], BuscadorCvu.prototype, "value", void 0);
@@ -154,7 +162,7 @@ var __vue_render__ = function __vue_render__() {
 
   return _c('div', {
     staticClass: "form-group mb-5"
-  }, [_vm._t("message", [_c('b-alert', {
+  }, [_c('b-alert', {
     attrs: {
       "show": _vm.dismissCountDown,
       "dismissible": "",
@@ -168,9 +176,9 @@ var __vue_render__ = function __vue_render__() {
         _vm.dismissCountDown = $event;
       }
     }
-  }, [_vm._v(_vm._s(_vm.alertMessage))])], {
-    "message": _vm.alertMessage
-  }), _vm._v(" "), _c('form', {
+  }, [_vm._t("message", [_vm._v(_vm._s(_vm.alertMessage))], {
+    "cvu": _vm.searchedKey
+  })], 2), _vm._v(" "), _c('form', {
     on: {
       "submit": function submit($event) {
         $event.preventDefault();
@@ -214,11 +222,17 @@ var __vue_render__ = function __vue_render__() {
       "id": "cvu-search-button",
       "disabled": _vm.searchButtonDisabled()
     }
-  }, [_c('font-awesome-icon', {
+  }, [!_vm.isSearching ? _c('font-awesome-icon', {
     attrs: {
       "icon": "search"
     }
-  }), _vm._v(" \n      "), !_vm.isSearching ? _c('span', [_vm._v("Buscar")]) : _c('span', [_vm._v("Buscando...")])], 1)])], 2);
+  }) : _c('span', {
+    staticClass: "spinner-border spinner-border-sm",
+    attrs: {
+      "role": "status",
+      "aria-hidden": "true"
+    }
+  })], 1)])], 1);
 };
 
 var __vue_staticRenderFns__ = [];

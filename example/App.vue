@@ -6,10 +6,11 @@
     <div class="row">
       <div class="col-3" />
       <div class="col-3">
+        <h5>Mostrando mensaje usando slot</h5>
         <buscador-cvu v-model="personaFisicaLeft" class="cvu-1">
           <template v-slot:message="slotProps">
-            <h5>Mostrando mensaje usando slot</h5>
-            {{ slotProps.message }}
+            <span>NO SE ENCONTRÓ PERSONA CON CVU</span>
+            {{ slotProps.cvu }}
           </template>
         </buscador-cvu>
         <code>{{ personaFisicaLeft }}</code>

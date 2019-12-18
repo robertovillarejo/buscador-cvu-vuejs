@@ -12,8 +12,9 @@ export default class BuscadorCvu extends Vue {
     alertType: string;
     alertMessage: string;
     searchKey: string;
+    searchedKey: string;
     isSearching: boolean;
     readonly options: Options;
     search(): void;
-    searchButtonDisabled(): boolean | "";
+    searchButtonDisabled(): boolean;
 }
