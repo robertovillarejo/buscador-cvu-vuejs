@@ -9,18 +9,17 @@
     >
       <slot name="message" v-bind:cvu="searchedKey">{{ alertMessage }}</slot>
     </b-alert>
-    <form v-on:submit.prevent="search()">
+    <form v-on:submit.prevent="search()" class="control">
       <div class="search-wrapper">
         <input
-          type="text"
-          name="focus"
+          id="cvu-search"
+          name="cvu-search"
           required
-          class="search-box"
+          class="input"
           placeholder="Enter search term"
           v-model.trim="searchKey"
-          v-on:keyup.enter="search()"
         />
-        <button class="close-icon" @click="clear"></button>
+        <button type="button" class="close-icon" @click="clear"></button>
       </div>
       <button
         type="submit"
@@ -44,33 +43,23 @@
 </template>
 <script lang="ts" src="./buscador-cvu.component.ts"></script>
 <style>
-body {
-  background-color: #f1f1f1;
-  font-family: Helvetica, Arial, Verdana;
-}
-.redfamily {
-  color: red;
-}
-.search-box,
+.input,
 .close-icon,
 .search-wrapper {
   position: relative;
   padding: 10px;
 }
 .search-wrapper {
-  width: 500px;
+  width: 100%;
   margin: auto;
   margin-top: 50px;
 }
-.search-box {
+.input {
   width: 80%;
   border: 1px solid #ccc;
   outline: 0;
   border-radius: 15px;
-}
-.search-box:focus {
-  box-shadow: 0 0 15px 5px #b0e0ee;
-  border: 2px solid #bebede;
+  max-width: 500px;
 }
 .close-icon {
   border: 1px solid transparent;
@@ -86,7 +75,7 @@ body {
   width: 15px;
   height: 15px;
   position: absolute;
-  background-color: #fa9595;
+  background-color: #b40c0c;
   z-index: 1;
   right: 35px;
   top: 0;
@@ -101,10 +90,7 @@ body {
   box-shadow: 0 0 2px #e50f0f;
   cursor: pointer;
 }
-.search-box:not(:valid) ~ .close-icon {
+.input:not(:valid) ~ .close-icon {
   display: none;
-}
-.search-box {
-  width: 300px;
 }
 </style>
