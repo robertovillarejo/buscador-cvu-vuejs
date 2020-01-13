@@ -50,16 +50,17 @@
   padding: 10px;
 }
 .search-wrapper {
-  width: 100%;
+  width: 80%;
   margin: auto;
-  margin-top: 50px;
+  margin-top: 30px;
 }
 .input {
   width: 80%;
   border: 1px solid #ccc;
   outline: 0;
   border-radius: 15px;
-  max-width: 500px;
+  max-width: 500%;
+  text-align: center;
 }
 .close-icon {
   border: 1px solid transparent;
@@ -77,7 +78,7 @@
   position: absolute;
   background-color: #b40c0c;
   z-index: 1;
-  right: 35px;
+  right: 30px;
   top: 0;
   bottom: 0;
   margin: auto;
@@ -86,11 +87,21 @@
   text-align: center;
   color: white;
   font-weight: normal;
-  font-size: 12px;
+  font-size: 9px;
   box-shadow: 0 0 2px #e50f0f;
   cursor: pointer;
 }
 .input:not(:valid) ~ .close-icon {
   display: none;
+}
+.control {
+  display: flex;
+  align-items: center;
+}
+.btn-primary {
+  margin-top: 10%;
+  width: 20%;
+  position: static;
+  margin-left: -35%;
 }
 </style>
